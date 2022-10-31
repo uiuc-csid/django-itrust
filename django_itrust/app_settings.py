@@ -26,7 +26,7 @@ SAML2_DISCO_URL = "https://discovery.illinois.edu/discovery/DS"
 
 ####### PYSAML CONFIG #######
 
-_BASE_URL = settings.SAML_BASE_URL
+_BASE_URLS = settings.SAML_BASE_URLS
 _SAML_KEY_FILE = settings.SAML_KEY_FILE
 _SAML_CERT_FILE = settings.SAML_CERT_FILE
 _ENTITY_NAME = settings.SAML_ENTITY_NAME
@@ -45,11 +45,13 @@ SAML_CONFIG = {
             # 'force_authn': False,
             "endpoints": {
                 "assertion_consumer_service": [
-                    (_BASE_URL + "/saml2/acs/", saml2.BINDING_HTTP_POST),
+                    (base_url + "/saml2/acs/", saml2.BINDING_HTTP_POST)
+                    for base_url in _BASE_URLS
                 ],
                 "single_logout_service": [
-                    (_BASE_URL + "/saml2/ls/", saml2.BINDING_HTTP_REDIRECT),
-                    (_BASE_URL + "/saml2/ls/post", saml2.BINDING_HTTP_POST),
+                    f"{base_url}/{suffix}"
+                    for suffix in ["saml2/ls/", "saml2/ls/post"]
+                    for base_url in _BASE_URLS
                 ],
             },
             "required_attributes": ["eduPersonPrincipalName"],
