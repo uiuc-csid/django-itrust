@@ -77,7 +77,7 @@ SAML_CONFIG = {
         }
     },
     "xmlsec_binary": "/usr/bin/xmlsec1",
-    "attribute_map_dir": _SAML_CONFIG_DIR / "attribute_maps",
+    "attribute_map_dir": str(_SAML_CONFIG_DIR / "attribute_maps"),
     "allow_unknown_attributes": True,
     "metadata": {
         "mdq": [
