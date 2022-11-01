@@ -1,5 +1,5 @@
-import datetime
 import logging
+from datetime import datetime
 
 from dateutil.parser import isoparse
 from django.core.cache import cache
