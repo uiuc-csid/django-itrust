@@ -90,6 +90,7 @@ MAP = {
         X500ATTR + "29": "presentationAddress",
         EDUPERSON_OID + "3": "eduPersonOrgDN",
         NOREDUPERSON_OID + "3": "norEduPersonBirthDate",
+        "oid:1.3.6.1.4.1.5923.1.5.1.1": "isMemberOf",
     },
     "to": {
         "roleOccupant": X500ATTR + "33",
@@ -186,5 +187,6 @@ MAP = {
         "presentationAddress": X500ATTR + "29",
         "sn": X500ATTR + "4",
         "domainComponent": UCL_DIR_PILOT + "25",
+        "isMemberOf": "oid:1.3.6.1.4.1.5923.1.5.1.1",
     },
 }
