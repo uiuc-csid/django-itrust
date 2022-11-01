@@ -48,17 +48,15 @@ SAML_CONFIG = {
                 "assertion_consumer_service": [
                     (f"{base_url}{binding[0]}", binding[1])
                     for binding in [
-                        ("/saml2/acs/post", saml2.BINDING_HTTP_POST),
-                        ("/saml2/acs/artifact", saml2.BINDING_HTTP_ARTIFACT),
+                        ("/saml2/acs/", saml2.BINDING_HTTP_POST),
                     ]
                     for base_url in _BASE_URLS
                 ],
                 "single_logout_service": [
                     (f"{base_url}{binding[0]}", binding[1])
                     for binding in [
-                        ("/saml2/ls/redirect", saml2.BINDING_HTTP_REDIRECT),
+                        ("/saml2/ls/", saml2.BINDING_HTTP_REDIRECT),
                         ("/saml2/ls/post", saml2.BINDING_HTTP_POST),
-                        ("/saml2/ls/artifact", saml2.BINDING_HTTP_ARTIFACT),
                     ]
                     for base_url in _BASE_URLS
                 ],
