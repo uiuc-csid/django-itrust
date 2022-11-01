@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import saml2
+import saml2.saml
 from django.conf import settings
 
 ##### APP CONFIGURATION #####
