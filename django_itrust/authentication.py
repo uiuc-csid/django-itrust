@@ -1,5 +1,5 @@
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dateutil.parser import isoparse
 from django.core.cache import cache
@@ -39,6 +39,6 @@ class ModifiedSaml2Backend(Saml2Backend):
             return False
 
         expiration_time = assertion.get("not_on_or_after")
-        time_delta = isoparse(expiration_time) - datetime.now(datetime.timezone.utc)
+        time_delta = isoparse(expiration_time) - datetime.now(timezone.utc)
         cache.set(assertion_id, "True", ex=time_delta)
         return True
