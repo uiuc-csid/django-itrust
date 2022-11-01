@@ -75,7 +75,7 @@ SAML_CONFIG = {
             "idp": {
                 "urn:mace:incommon:uiuc.edu": {
                     "single_sign_on_service": {
-                        saml2.BINDING_HTTP_POST: "https://shibboleth.illinois.edu/idp/profile/SAML2/POST/SSO",
+                        # saml2.BINDING_HTTP_POST: "https://shibboleth.illinois.edu/idp/profile/SAML2/POST/SSO",
                         saml2.BINDING_HTTP_REDIRECT: "https://shibboleth.illinois.edu/idp/profile/SAML2/Redirect/SSO",
                     },
                     "single_logout_service": {
