@@ -94,19 +94,19 @@ SAML_CONFIG = {
         "mdq": [
             {
                 "url": "https://mdq.incommon.org/",
-                "cert": _SAML_CONFIG_DIR / "certs" / "inc-md-cert-mdq.pem",
+                "cert": str(_SAML_CONFIG_DIR / "certs" / "inc-md-cert-mdq.pem"),
             }
         ]
     },
     # set to 1 to output debugging information
     "debug": 1,
     # certificate and key
-    "key_file": _SAML_KEY_FILE,
-    "cert_file": _SAML_CERT_FILE,
+    "key_file": str(_SAML_KEY_FILE),
+    "cert_file": str(_SAML_CERT_FILE),
     "encryption_keypairs": [
         {
-            "key_file": _SAML_KEY_FILE,
-            "cert_file": _SAML_CERT_FILE,
+            "key_file": str(_SAML_KEY_FILE),
+            "cert_file": str(_SAML_CERT_FILE),
         }
     ],
     # own metadata settings
