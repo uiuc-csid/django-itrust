@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import saml2.saml
+import saml2
 from django.conf import settings
 
 ##### APP CONFIGURATION #####
@@ -45,12 +45,20 @@ SAML_CONFIG = {
             # 'force_authn': False,
             "endpoints": {
                 "assertion_consumer_service": [
-                    (base_url + "/saml2/acs/", saml2.BINDING_HTTP_POST)
+                    (f"{base_url}{binding[0]}", binding[1])
+                    for binding in [
+                        ("/saml2/acs/post", saml2.BINDING_HTTP_POST),
+                        ("/saml2/acs/artifact", saml2.BINDING_HTTP_ARTIFACT),
+                    ]
                     for base_url in _BASE_URLS
                 ],
                 "single_logout_service": [
-                    f"{base_url}/{suffix}"
-                    for suffix in ["saml2/ls/", "saml2/ls/post"]
+                    (f"{base_url}{binding[0]}", binding[1])
+                    for binding in [
+                        ("/saml2/ls/redirect", saml2.BINDING_HTTP_REDIRECT),
+                        ("/saml2/ls/post", saml2.BINDING_HTTP_POST),
+                        ("/saml2/ls/artifact", saml2.BINDING_HTTP_ARTIFACT),
+                    ]
                     for base_url in _BASE_URLS
                 ],
             },
