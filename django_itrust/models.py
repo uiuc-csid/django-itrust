@@ -1,5 +1,10 @@
+import logging
+
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+logger = logging.getLogger(__name__)
 
 
 class ITrustUser(AbstractUser):
@@ -25,9 +30,9 @@ class ITrustUser(AbstractUser):
     # uin: (iTrustUIN) -> oid:1.3.6.1.4.1.11483.101.4
     itrust_uin = models.IntegerField(default=-1)
     # itrust_groups: (isMemberOf) -> oid:1.3.6.1.4.1.5923.1.5.1.1
-    itrust_groups = models.JSONField(default=dict)
+    itrust_groups = models.JSONField(default=list)
     # iTrustAffiliation:  oid:1.3.6.1.4.1.11483.101.1
-    itrust_affiliation = models.CharField(max_length=256)
+    itrust_affiliation = models.JSONField(default=list)
 
     # eduPersonOrgDN: oid:1.3.6.1.4.1.5923.1.1.1.3
     # eduPersonPrimaryAffiliation:  oid:1.3.6.1.4.1.5923.1.1.1.5
@@ -39,3 +44,15 @@ class ITrustUser(AbstractUser):
     # eduPersonNickname:  oid:1.3.6.1.4.1.5923.1.1.1.2
     # iTrustHomeDeptCode:  oid:1.3.6.1.4.1.11483.101.5
     # organizationalUnit:  oid:2.5.4.11
+
+    def process_groups(self, groups):
+        if set(settings.SAML_SUPERUSER_GROUPS) & set(groups):
+            self.is_staff = True
+            self.is_superuser = True
+
+        logger.debug(f"{groups = }")
+        self.itrust_groups = groups
+
+    def process_affiliations(self, affiliations):
+        logger.debug(f"{affiliations = }")
+        self.itrust_affiliation = affiliations

@@ -1,7 +1,8 @@
 __author__ = "rolandh"
 
-ITRUST_OID = "oid:1.3.6.1.4.1.11483.101."
+ITRUST_OID = "urn:oid:1.3.6.1.4.1.11483.101."
 EDUPERSON_OID = "urn:oid:1.3.6.1.4.1.5923.1.1.1."
+EDUMEMBER_OID = "urn:oid:1.3.6.1.4.1.5923.1.5.1."
 X500ATTR_OID = "urn:oid:2.5.4."
 NOREDUPERSON_OID = "urn:oid:1.3.6.1.4.1.2428.90.1."
 NETSCAPE_LDAP = "urn:oid:2.16.840.1.113730.3.1."
@@ -13,6 +14,7 @@ SCHAC = "urn:oid:1.3.6.1.4.1.25178.2."
 MAP = {
     "identifier": "urn:oasis:names:tc:SAML:2.0:attrname-format:uri",
     "fro": {
+        EDUMEMBER_OID + "1": "isMemberOf",
         ITRUST_OID + "1": "iTrustAffiliation",
         ITRUST_OID + "2": "iTrustMiddleName",
         ITRUST_OID + "3": "iTrustSuppress",
@@ -123,6 +125,7 @@ MAP = {
         SCHAC + "21": "schacProjectSpecificRole",
     },
     "to": {
+        "isMemberOf": EDUMEMBER_OID + "1",
         "iTrustAffiliation": ITRUST_OID + "1",
         "iTrustMiddleName": ITRUST_OID + "2",
         "iTrustSuppress": ITRUST_OID + "3",

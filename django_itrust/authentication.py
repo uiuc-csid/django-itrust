@@ -1,5 +1,6 @@
 import logging
 from datetime import datetime, timezone
+from typing import Dict
 
 from dateutil.parser import isoparse
 from django.core.cache import cache
@@ -14,21 +15,13 @@ class ModifiedSaml2Backend(Saml2Backend):
     https://djangosaml2.readthedocs.io/contents/setup.html#custom-user-attributes-processing
     """
 
-    def _update_user(
-        self, user, attributes: dict, attribute_mapping: dict, force_save: bool = False
-    ):
-        return super()._update_user(user, attributes, attribute_mapping, force_save)
-
-    def save_user(self, user, *args, **kwargs):
-        return super().save_user(user, *args, **kwargs)
-
     def is_authorized(
         self,
-        attributes: dict,
-        attribute_mapping: dict,
+        attributes: Dict,
+        attribute_mapping: Dict,
         idp_entityid: str,
-        assertion: dict,
-        **kwargs
+        assertion: Dict[str, str],
+        **kwargs,
     ) -> bool:
         if not assertion:
             return True
@@ -40,5 +33,5 @@ class ModifiedSaml2Backend(Saml2Backend):
 
         expiration_time = assertion.get("not_on_or_after")
         time_delta = isoparse(expiration_time) - datetime.now(timezone.utc)
-        cache.set(assertion_id, "True", ex=time_delta)
+        cache.set(assertion_id, "True", timeout=int(time_delta.total_seconds()))
         return True

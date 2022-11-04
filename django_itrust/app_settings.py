@@ -18,12 +18,13 @@ SAML_ATTRIBUTE_MAPPING = {
     "uid": ("netid",),
     "iTrustSuppress": ("ferpa_supress",),
     "iTrustUIN": ("itrust_uin",),
-    "isMemberOf": ("itrust_groups",),
-    "iTrustAffiliation": ("itrust_affiliation",),
+    "iTrustAffiliation": ("process_affiliations",),
+    "isMemberOf": ("process_groups",),
 }
 SAML_DJANGO_USER_MAIN_ATTRIBUTE = "username"
 SAML_DJANGO_USER_MAIN_ATTRIBUTE_LOOKUP = "__iexact"
 SAML2_DISCO_URL = "https://discovery.illinois.edu/discovery/DS"
+SAML_DEFAULT_BINDING = saml2.BINDING_HTTP_REDIRECT
 
 ####### PYSAML CONFIG #######
 
