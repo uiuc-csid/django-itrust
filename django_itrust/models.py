@@ -30,9 +30,9 @@ class ITrustUser(AbstractUser):
     # uin: (iTrustUIN) -> oid:1.3.6.1.4.1.11483.101.4
     itrust_uin = models.IntegerField(default=-1)
     # itrust_groups: (isMemberOf) -> oid:1.3.6.1.4.1.5923.1.5.1.1
-    itrust_groups = models.JSONField(default=list)
+    itrust_groups = models.JSONField(null=True, blank=True, default=list)
     # iTrustAffiliation:  oid:1.3.6.1.4.1.11483.101.1
-    itrust_affiliation = models.JSONField(default=list)
+    itrust_affiliation = models.JSONField(null=True, blank=True, default=list)
 
     # eduPersonOrgDN: oid:1.3.6.1.4.1.5923.1.1.1.3
     # eduPersonPrimaryAffiliation:  oid:1.3.6.1.4.1.5923.1.1.1.5

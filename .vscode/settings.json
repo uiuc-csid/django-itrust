@@ -17,5 +17,12 @@
         "titleBar.activeForeground": "#e7e7e7",
         "titleBar.inactiveBackground": "#66339999",
         "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/*/**": true,
+        "**/.hg/store/**": true,
+        "**/.mypy_cache/**": true
     }
 }
