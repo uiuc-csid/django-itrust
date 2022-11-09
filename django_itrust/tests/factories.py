@@ -20,4 +20,4 @@ class ITrustUserFactory(DjangoModelFactory):
     netid = factory.Faker("user_name")
     ferpa_supress = False
     itrust_uin = factory.Sequence(lambda n: 1000 + n)
-    itrust_affiliation = "student"  # Or 'staff
+    itrust_affiliation = ["student"]  # Or 'staff
