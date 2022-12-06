@@ -9,15 +9,21 @@ class ITrustUserFactory(DjangoModelFactory):
         model = ITrustUser
         django_get_or_create = ["username"]
 
-    email = factory.Faker("safe_email")
-    username = factory.LazyAttribute(lambda obj: obj.email)
-    password = factory.PostGenerationMethodCall("set_password", "adm1n")
+    @staticmethod
+    def get_username(obj):
+        return f"{obj.first_name[0]}{obj.last_name}".lower()
+
     first_name = factory.Faker("first_name")
     last_name = factory.Faker("last_name")
+    username = factory.LazyAttribute(lambda obj: ITrustUserFactory.get_username(obj))
+    email = factory.LazyAttribute(
+        lambda obj: f"{ITrustUserFactory.get_username(obj)}@example.net"
+    )
+    password = factory.PostGenerationMethodCall("set_password", "adm1n")
     is_staff = False
     is_superuser = False
 
-    netid = factory.Faker("user_name")
+    netid = factory.LazyAttribute(lambda obj: ITrustUserFactory.get_username(obj))
     ferpa_supress = False
     itrust_uin = factory.Sequence(lambda n: 1000 + n)
     itrust_affiliation = ["student"]  # Or 'staff
