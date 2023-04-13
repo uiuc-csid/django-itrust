@@ -16,7 +16,7 @@ SAML_ATTRIBUTE_MAPPING = {
     "givenName": ("first_name",),
     "sn": ("last_name",),
     "uid": ("netid",),
-    "iTrustSuppress": ("ferpa_supress",),
+    "iTrustSuppress": ("process_ferpa_supress",),
     "iTrustUIN": ("itrust_uin",),
     "iTrustAffiliation": ("process_affiliations",),
     "isMemberOf": ("process_groups",),

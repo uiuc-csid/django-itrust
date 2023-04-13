@@ -56,3 +56,8 @@ class ITrustUser(AbstractUser):
     def process_affiliations(self, affiliations):
         logger.debug(f"{affiliations = }")
         self.itrust_affiliation = affiliations
+
+    def process_ferpa_supress(self, ferpa_supress):
+        logger.debug(f"{ferpa_supress = }")
+        value = str(ferpa_supress).lower()
+        self.ferpa_supress = value in ["t", "y", "true", "1", "yes"]

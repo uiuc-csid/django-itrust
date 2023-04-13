@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PIP_DEFAULT_TIMEOUT=100 \
     # poetry:
     POETRY_VERSION=${POETRY_VERSION} \
-    POETRY_VIRTUALENVS_CREATE=true \
+    POETRY_VIRTUALENVS_CREATE=1 \
     POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 # Configure apt and install packages
@@ -20,8 +20,5 @@ RUN apt-get update \
         xmlsec1 \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install "poetry==$POETRY_VERSION"
-
 WORKDIR /workspace/opportunities
-
 ENV DEBIAN_FRONTEND=dialog

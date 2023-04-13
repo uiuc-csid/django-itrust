@@ -6,9 +6,15 @@
 		"dockerfile": "Dockerfile",
 		"context": "..",
 		"args": { 
-			"PYTHON_VERSION": "3.9",
+			"PYTHON_VERSION": "3.9"
 		}
 	},
+	"remoteUser": "vscode",
+	"mounts": [
+		"source=${localWorkspaceFolderBasename}-homedir,target=/home/vscode,type=volume",
+		"source=${localWorkspaceFolderBasename}-ipython,target=/ipython,type=volume",
+		"source=${localWorkspaceFolderBasename}-poetry,target=/var/cache/pypoetry,type=volume"
+	],
 
 	"customizations": {
 		"vscode": {
@@ -19,12 +25,14 @@
 		}
 	},
 
-	"postCreateCommand": "poetry install --no-interaction && poetry run pre-commit install",
+	"postCreateCommand": "sudo chmod -R a+rw /var/cache/pypoetry && curl -sSL https://install.python-poetry.org | python3 - && poetry install --no-interaction && poetry run pre-commit install",
 
 	"features": {
-		"common": {
-			"installZsh": true,
-        	"installOhMyZsh": false
-		}
-	}
+        "ghcr.io/devcontainers/features/common-utils:1": {
+            "username": "vscode",
+            "installZsh": true,
+            "installOhMyZsh": false
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    }
 }
