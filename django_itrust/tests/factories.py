@@ -19,7 +19,6 @@ class ITrustUserFactory(DjangoModelFactory):
     email = factory.LazyAttribute(
         lambda obj: f"{ITrustUserFactory.get_username(obj)}@example.net"
     )
-    password = factory.PostGenerationMethodCall("set_password", "adm1n")
     is_staff = False
     is_superuser = False
 
@@ -27,3 +26,12 @@ class ITrustUserFactory(DjangoModelFactory):
     ferpa_supress = False
     itrust_uin = factory.Sequence(lambda n: 1000 + n)
     itrust_affiliation = ["student"]  # Or 'staff
+
+    @factory.post_generation
+    def password(obj, create, extracted, **kwargs):
+        if create:
+            return
+
+        raw_password = extracted or "admin"
+        obj.set_password(raw_password)
+        obj.save()
